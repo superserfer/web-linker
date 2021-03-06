@@ -48,6 +48,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     NavigationComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     A11yModule,

@@ -2,11 +2,11 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My App</span>
+  <span>Linker</span>
   <span class="spacer"></span>
   <div class="flex-stretch"></div>
   <mat-icon class="mr-8">brightness_5</mat-icon>
-  <mat-slide-toggle [checked]="isDarkmodeOn" class="mr-8">
+  <mat-slide-toggle (click)="toggleDarkMode()" [(ngModel)]="isDarkmode" class="mr-8">
   </mat-slide-toggle>
   <mat-icon>bedtime</mat-icon>
 </mat-toolbar>

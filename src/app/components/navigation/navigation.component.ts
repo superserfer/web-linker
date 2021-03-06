@@ -1,3 +1,4 @@
+import { ThemeService } from './../../services/theme.service';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -8,10 +9,18 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-isDarkmodeOn: boolean = false;
-  constructor() {
+isDarkmode: boolean;
+  constructor(private themeService: ThemeService) {
+    themeService.initTheme();
+    this.isDarkmode = themeService.isDarkMode();
    }
 
   ngOnInit(): void {
+  }
+
+  toggleDarkMode() {
+    this.isDarkmode = this.themeService.isDarkMode();
+    this.themeService.update(this.isDarkmode ? 'light-mode' : 'dark-mode');
+
   }
 }
