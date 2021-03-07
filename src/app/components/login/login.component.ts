@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
         // Todo: Add notification
         this.authenticationService.setToken(res);
         // Todo: Get user and save in authenticationService
+        // Todo: Relocate User
       },
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
           this.login.password = '';
           this.login.username = '';
         }
-        if (error.status === 409) {
+        if (error.status === 401) {
           // Todo: Notification wrong password
           this.login.password = '';
         }
