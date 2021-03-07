@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 import {JsonWebToken} from '../models/json-web-token';
 import {HttpClient} from '@angular/common/http';
-import {Login} from '../models/login';
+import {Authentication} from '../models/authentication';
 // @ts-ignore
 import server from '../../environments/server.json';
 import {Observable} from 'rxjs';
@@ -34,11 +34,13 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  public login(login: Login): Observable<JsonWebToken> {
+  public login(login: Authentication): Observable<JsonWebToken> {
     return this.httpClient.post<JsonWebToken>(server.address + '/auth', login);
   }
 
   public isAuthenticated(): boolean {
     return JsonWebToken !== undefined && JsonWebToken !== null;
   }
+
+  // Todo: register methode
 }

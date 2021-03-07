@@ -1,0 +1,64 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <h1>Linker Register</h1>
+    <mat-card-content>
+      <!--Username-->
+      <div>
+        <mat-label>Username</mat-label>
+        <mat-form-field class="input">
+          <mat-label>unique username</mat-label>
+          <label>
+            <input [(ngModel)]="newUser.username" required matInput>
+          </label>
+        </mat-form-field>
+      </div>
+      <!--Email-->
+      <div>
+        <mat-label>Email</mat-label>
+        <mat-form-field class="input">
+          <mat-label>unique email</mat-label>
+          <label>
+            <input [(ngModel)]="newUser.email" type="email" required matInput>
+          </label>
+        </mat-form-field>
+      </div>
+      <!--Password-->
+      <div>
+        <mat-label>Password</mat-label>
+        <mat-form-field class="input">
+          <mat-label>At least 7 characters</mat-label>
+          <label>
+            <input [(ngModel)]="newUser.password" required matInput [type]="hide ? 'password' : 'text'">
+          </label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <!--Password verification-->
+      <div>
+        <mat-label>Password verification</mat-label>
+        <mat-form-field class="input">
+          <mat-label>Repeat your password</mat-label>
+          <label>
+            <input [(ngModel)]="passwordVerification" required matInput [type]="hideRepeat ? 'password' : 'text'">
+          </label>
+          <button mat-icon-button matSuffix (click)="hideRepeat = !hideRepeat" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideRepeat">
+            <mat-icon>{{hideRepeat ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <!--Errors if input is invalid-->
+      <mat-error *ngIf="!hasAllAttributes">You have missing attributes<br></mat-error>
+      <mat-error *ngIf="!isPasswordStrong">Password isn't strong enough<br></mat-error>
+      <mat-error *ngIf="!isValidEmail">Email is invalid</mat-error>
+      <mat-error *ngIf="!isPasswordsMatching">Passwords don't match</mat-error>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button routerLink="/login">Login</button>
+      <button mat-raised-button color="primary" (click)="register()">Register</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

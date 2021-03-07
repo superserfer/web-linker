@@ -53,15 +53,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/authentication/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from '@angular/router';
+import { RegisterComponent } from './components/authentication/register/register.component';
+import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     HttpClientModule,

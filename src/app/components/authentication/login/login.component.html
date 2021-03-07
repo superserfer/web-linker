@@ -7,7 +7,7 @@
         <mat-form-field class="input">
           <mat-label>Enter your username</mat-label>
           <label>
-            <input matInput [(ngModel)]="login.username">
+            <input required matInput [(ngModel)]="login.username">
           </label>
         </mat-form-field>
       </div>
@@ -16,7 +16,7 @@
         <mat-form-field class="input">
           <mat-label>Enter your password</mat-label>
           <label>
-            <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="login.password">
+            <input required matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="login.password">
           </label>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                   [attr.aria-pressed]="hide">
@@ -26,8 +26,9 @@
       </div>
     </mat-card-content>
     <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button routerLink="/forgot/username">Forgot username</button>
+      <button mat-button routerLink="/register">Register</button>
       <button mat-raised-button color="primary" (click)="authenticate()">Login</button>
-      <button mat-raised-button routerLink="/register">Register</button>
     </mat-card-actions>
   </mat-card>
 </div>

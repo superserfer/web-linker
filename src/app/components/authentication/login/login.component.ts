@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Login} from '../../models/login';
-import {AuthenticationService} from '../../services/authentication.service';
+import {Authentication} from '../../../models/authentication';
+import {AuthenticationService} from '../../../services/authentication.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,12 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  login: Login = new Login();
+  login: Authentication = new Authentication();
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -20,10 +24,10 @@ export class LoginComponent implements OnInit {
   authenticate(): void{
     this.authenticationService.login(this.login).subscribe(
       (res) => {
-        // Todo: Add notification
         this.authenticationService.setToken(res);
+        // Todo: Add notification
         // Todo: Get user and save in authenticationService
-        // Todo: Relocate User
+        this.router.navigateByUrl('/').then(() => {});
       },
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
