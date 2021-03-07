@@ -1,7 +1,5 @@
-import { ThemeService } from './../../services/theme.service';
-import { EventEmitter } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { Component, OnInit, Output } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-navigation',
@@ -18,7 +16,7 @@ isDarkmode: boolean;
   ngOnInit(): void {
   }
 
-  toggleDarkMode() {
+  toggleDarkMode(): void {
     this.isDarkmode = this.themeService.isDarkMode();
     this.themeService.update(this.isDarkmode ? 'light-mode' : 'dark-mode');
 

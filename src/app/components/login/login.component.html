@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <h1>Linker Login</h1>
+    <mat-card-content>
+      <!--Username-->
+      <div>
+        <mat-form-field class="input">
+          <mat-label>Enter your username</mat-label>
+          <label>
+            <input matInput>
+          </label>
+        </mat-form-field>
+      </div>
+      <!--Password-->
+      <div>
+        <mat-form-field class="input">
+          <mat-label>Enter your password</mat-label>
+          <label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+          </label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary">Login</button>
+      <button mat-raised-button routerLink="/register">Register</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
