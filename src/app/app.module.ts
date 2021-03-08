@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -45,19 +45,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { AppRoutingModule } from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NavigationComponent} from './components/navigation/navigation.component';
+import {FormsModule} from '@angular/forms';
+import {LoginComponent} from './components/authentication/login/login.component';
+import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
-import { RegisterComponent } from './components/authentication/register/register.component';
-import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
+import {RegisterComponent} from './components/authentication/register/register.component';
+import {ForgotPasswordComponent} from './components/authentication/forgot-password/forgot-password.component';
+import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import { ForgotPasswordComponent } from './components/authentication/forgot-pass
     AppRoutingModule,
     RouterModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
