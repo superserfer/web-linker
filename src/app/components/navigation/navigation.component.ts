@@ -1,5 +1,6 @@
 import { ThemeService } from '../../services/theme.service';
 import { Component, OnInit, Output } from '@angular/core';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +9,9 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 isDarkmode: boolean;
-  constructor(private themeService: ThemeService) {
+  constructor(
+    private themeService: ThemeService,
+  ) {
     themeService.initTheme();
     this.isDarkmode = themeService.isDarkMode();
    }

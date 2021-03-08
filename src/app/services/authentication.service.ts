@@ -6,15 +6,18 @@ import {Authentication} from '../models/authentication';
 // @ts-ignore
 import server from '../../environments/server.json';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentUser: User;
   private token: JsonWebToken;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) { }
 
   public getCurrentUser(): User{
     return JSON.parse(localStorage.getItem('currentUser'));
@@ -22,7 +25,6 @@ export class AuthenticationService {
 
   public setCurrentUser(user: User): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
-    this.currentUser = user;
   }
 
   public getToken(): JsonWebToken {
@@ -39,8 +41,13 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    return JsonWebToken !== undefined && JsonWebToken !== null;
+    return this.token !== undefined && this.token !== null;
   }
 
-  // Todo: register methode
+  public logout(): void {
+    this.token = null;
+    localStorage.clear();
+    this.router.navigateByUrl('/login').then(r => {});
+  }
+
 }
