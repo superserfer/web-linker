@@ -16,8 +16,10 @@ export class AuthenticationInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // request.headers.append('Bearer', this.authenticationService.getToken().jwt);
-    request = request.clone({headers: request.headers.set('Bearer', this.authenticationService.getToken().jwt)});
-    return next.handle(request);
+    const requestWithAuthentication: HttpRequest<unknown> = request.clone({
+      setHeaders: {
+        Authorization:  `Bearer ${this.authenticationService.getToken()}`
+      }});
+    return next.handle(requestWithAuthentication);
   }
 }

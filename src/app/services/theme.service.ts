@@ -7,16 +7,16 @@ export class ThemeService {
   private renderer: Renderer2;
   private colorTheme: string;
 
-  constructor(rendererFactory: RendererFactory2) { 
-    this.renderer = rendererFactory.createRenderer(null, null)
+  constructor(rendererFactory: RendererFactory2) {
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
 
-  public initTheme() {
+  public initTheme(): void {
     this.getColorTheme();
-    this.renderer.addClass(document.body,this.colorTheme);
+    this.renderer.addClass(document.body, this.colorTheme);
   }
 
-  public update(theme: 'dark-mode'| 'light-mode'){
+  public update(theme: 'dark-mode'| 'light-mode'): void{
     this.setColorTheme(theme);
     const previousColorTheme = (theme === 'dark-mode' ? 'light-mode' : 'dark-mode');
     this.renderer.removeClass(document.body, previousColorTheme);
@@ -27,12 +27,12 @@ export class ThemeService {
     return this.colorTheme === 'dark-mode';
   }
 
-  private setColorTheme(theme: string){
+  private setColorTheme(theme: string): void{
     this.colorTheme = theme;
-    localStorage.setItem('user-theme',theme);
+    localStorage.setItem('user-theme', theme);
   }
 
-  private getColorTheme(){
+  private getColorTheme(): void{
     if (localStorage.getItem('user-theme')){
       this.colorTheme = localStorage.getItem('user-theme');
     } else {
