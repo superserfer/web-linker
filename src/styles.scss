@@ -46,3 +46,13 @@ body{
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.error-notification {
+  background-color: #d50000 !important;
+  color: whitesmoke !important;
+}
+
+.success-notification {
+  background-color: #64dd17 !important;
+  color: #202020 !important;
+}
