@@ -59,6 +59,7 @@ import {RouterModule} from '@angular/router';
 import {RegisterComponent} from './components/authentication/register/register.component';
 import {ForgotPasswordComponent} from './components/authentication/forgot-password/forgot-password.component';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
+import {ErrorInterceptor} from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,10 @@ import {AuthenticationInterceptor} from './interceptors/authentication.intercept
     AppRoutingModule,
     RouterModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
   authenticate(): void{
     this.authenticationService.login(this.login).subscribe(
       (res) => {
+        // logout -> CurrentUser and Token get cleared
+        this.authenticationService.logout();
         this.authenticationService.setToken(res);
         // Todo: Add notification
         // Todo: Get user and save in authenticationService
