@@ -27,12 +27,12 @@ export class AuthenticationService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  public getToken(): JsonWebToken {
+  public getToken(): string {
     return JSON.parse(localStorage.getItem('token'));
   }
 
   public setToken(token: JsonWebToken): void {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('token', JSON.stringify(token.jwt));
     this.token = token;
   }
 
@@ -48,7 +48,7 @@ export class AuthenticationService {
     this.token = null;
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
-    this.router.navigateByUrl('/login').then(r => {});
+    this.router.navigateByUrl('/login').then(() => {});
   }
 
 }
