@@ -7,6 +7,7 @@ import {Authentication} from '../../../models/authentication';
 import {JsonWebToken} from '../../../models/json-web-token';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -54,18 +56,19 @@ export class RegisterComponent implements OnInit {
       })).subscribe(
       (jsonWebToken: JsonWebToken) => {
         this.authenticationService.setToken(jsonWebToken);
-        this.router.navigateByUrl('/').then(r => {});
+        this.notificationService.sendNotification('Successfully registered', 'success-notification');
+        this.router.navigateByUrl('/').then(() => {});
       }, (error: HttpErrorResponse) => {
         switch (error.status) {
           case 409:
-            // TODO: Username or Email is already in use notification
+            this.notificationService.sendNotification(error.message, 'error-notification');
             break;
           case 404:
-            // TODO: Can't authenticate, user need to login manuel notification
-            this.router.navigateByUrl('/login').then(r => {});
+            this.notificationService.sendNotification('Successfully registered, please authenticate yourself', 'success-notification');
+            this.router.navigateByUrl('/login').then(() => {});
             break;
           case  400:
-            // Todo: Wrong email format or missing attributes notification something went wrong don't login
+            this.notificationService.sendNotification('Something went wrong', 'error-notification');
             break;
         }
       }

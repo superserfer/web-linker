@@ -3,6 +3,7 @@ import {Authentication} from '../../../models/authentication';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -27,18 +29,18 @@ export class LoginComponent implements OnInit {
         // logout -> CurrentUser and Token get cleared
         this.authenticationService.logout();
         this.authenticationService.setToken(res);
-        // Todo: Add notification
-        // Todo: Get user and save in authenticationService
+        this.notificationService.sendNotification('Successfully logged in', 'success-notification');
+        // Todo: Get user and save in authenticationService, change subscribe to pipe
         this.router.navigateByUrl('/').then(() => {});
       },
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
-          // Todo: Notification user with username doesn't exist
+          this.notificationService.sendNotification('Username dosen\'t exist' , 'error-notification');
           this.login.password = '';
           this.login.username = '';
         }
         if (error.status === 401) {
-          // Todo: Notification wrong password
+          this.notificationService.sendNotification('Wrong password', 'error-notification');
           this.login.password = '';
         }
       }
