@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="this.loaderService.isLoading | async" color="accent" mode="query"></mat-progress-bar>
 <mat-toolbar color="primary" class="nav">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
@@ -10,3 +11,4 @@
   </mat-slide-toggle>
   <mat-icon>dark_mode</mat-icon>
 </mat-toolbar>
+

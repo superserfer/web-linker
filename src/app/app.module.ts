@@ -60,6 +60,7 @@ import {RegisterComponent} from './components/authentication/register/register.c
 import {ForgotPasswordComponent} from './components/authentication/forgot-password/forgot-password.component';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
+import {LoaderInterceptor} from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import {ErrorInterceptor} from './interceptors/error.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
