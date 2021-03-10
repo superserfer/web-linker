@@ -1,7 +1,7 @@
-import { ThemeService } from '../../services/theme.service';
-import { Component, OnInit, Output } from '@angular/core';
-import {UserService} from '../../services/user.service';
+import {ThemeService} from '../../services/theme.service';
+import {Component, OnInit} from '@angular/core';
 import {LoaderService} from '../../services/loader.service';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,14 +9,15 @@ import {LoaderService} from '../../services/loader.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-isDarkmode: boolean;
+  isDarkmode: boolean;
   constructor(
     private themeService: ThemeService,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    public authenticationService: AuthenticationService
   ) {
     themeService.initTheme();
     this.isDarkmode = themeService.isDarkMode();
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -25,5 +26,9 @@ isDarkmode: boolean;
     this.isDarkmode = this.themeService.isDarkMode();
     this.themeService.update(this.isDarkmode ? 'light-mode' : 'dark-mode');
 
+  }
+
+  logout(): void {
+    this.authenticationService.logout();
   }
 }

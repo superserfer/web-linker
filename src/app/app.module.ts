@@ -61,6 +61,8 @@ import {ForgotPasswordComponent} from './components/authentication/forgot-passwo
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
+import { HomeComponent } from './components/home/home/home.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import {LoaderInterceptor} from './interceptors/loader.interceptor';
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     HttpClientModule,

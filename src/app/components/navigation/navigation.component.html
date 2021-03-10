@@ -1,14 +1,17 @@
 <mat-progress-bar *ngIf="this.loaderService.isLoading | async" color="accent" mode="query"></mat-progress-bar>
 <mat-toolbar color="primary" class="nav">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+  <button mat-icon-button routerLink="" aria-label="Home Icon">
+    <mat-icon>home</mat-icon>
   </button>
   <span>Linker</span>
   <span class="spacer"></span>
-  <div class="flex-stretch"></div>
   <mat-icon class="mr-8">light_mode</mat-icon>
   <mat-slide-toggle (click)="toggleDarkMode()" [(ngModel)]="isDarkmode" class="mr-8">
   </mat-slide-toggle>
   <mat-icon>dark_mode</mat-icon>
+  <button (click)="logout()" *ngIf="this.authenticationService.isAuthenticated() | async" class="logout" mat-icon-button
+          aria-label="Logout Icon">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 

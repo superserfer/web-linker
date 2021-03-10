@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Authentication} from '../models/authentication';
 // @ts-ignore
 import server from '../../environments/server.json';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -40,8 +40,8 @@ export class AuthenticationService {
     return this.httpClient.post<JsonWebToken>(server.address + '/auth', login);
   }
 
-  public isAuthenticated(): boolean {
-    return this.token !== undefined && this.token !== null;
+  public isAuthenticated(): BehaviorSubject<boolean> {
+    return new BehaviorSubject<boolean>(!(this.getCurrentUser() === null || this.getToken() === null));
   }
 
   public logout(): void {
