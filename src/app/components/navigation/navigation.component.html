@@ -5,6 +5,8 @@
   </button>
   <span>Linker</span>
   <span class="spacer"></span>
+  <span *ngIf="this.authenticationService.isAuthenticated() | async"> {{currentUser.username}}</span>
+  <span class="spacer"></span>
   <mat-icon class="mr-8">light_mode</mat-icon>
   <mat-slide-toggle (click)="toggleDarkMode()" [(ngModel)]="isDarkmode" class="mr-8">
   </mat-slide-toggle>

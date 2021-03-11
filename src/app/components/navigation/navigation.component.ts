@@ -2,6 +2,7 @@ import {ThemeService} from '../../services/theme.service';
 import {Component, OnInit} from '@angular/core';
 import {LoaderService} from '../../services/loader.service';
 import {AuthenticationService} from '../../services/authentication.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-navigation',
@@ -10,6 +11,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 })
 export class NavigationComponent implements OnInit {
   isDarkmode: boolean;
+  currentUser: User;
   constructor(
     private themeService: ThemeService,
     public loaderService: LoaderService,
@@ -17,6 +19,10 @@ export class NavigationComponent implements OnInit {
   ) {
     themeService.initTheme();
     this.isDarkmode = themeService.isDarkMode();
+    this.authenticationService.initAuthentication();
+    this.authenticationService.currentUser.subscribe((res: User) => {
+      this.currentUser = res;
+    });
   }
 
   ngOnInit(): void {

@@ -16,7 +16,7 @@ export class AuthenticationGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authenticationService.getToken() === null || this.authenticationService.getCurrentUser() === null) {
+    if (this.authenticationService.getToken() === null) {
       this.authenticationService.logout();
       this.router.navigateByUrl('login').then(() => {});
       return false;

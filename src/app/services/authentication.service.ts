@@ -12,19 +12,20 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private token: JsonWebToken;
+  public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(
     private httpClient: HttpClient,
     private router: Router
   ) { }
 
-  public getCurrentUser(): User{
-    return JSON.parse(localStorage.getItem('currentUser'));
+  public initAuthentication(): void {
+    this.currentUser.next(JSON.parse(localStorage.getItem('currentUser')));
   }
 
   public setCurrentUser(user: User): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUser.next(user);
   }
 
   public getToken(): string {
@@ -33,7 +34,6 @@ export class AuthenticationService {
 
   public setToken(token: JsonWebToken): void {
     localStorage.setItem('token', JSON.stringify(token.jwt));
-    this.token = token;
   }
 
   public login(login: Authentication): Observable<JsonWebToken> {
@@ -41,11 +41,11 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): BehaviorSubject<boolean> {
-    return new BehaviorSubject<boolean>(!(this.getCurrentUser() === null || this.getToken() === null));
+    return new BehaviorSubject<boolean>(!(this.currentUser.getValue() === null || this.getToken() === null));
   }
 
   public logout(): void {
-    this.token = null;
+    this.currentUser.next(null);
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     this.router.navigateByUrl('/login').then(() => {});
